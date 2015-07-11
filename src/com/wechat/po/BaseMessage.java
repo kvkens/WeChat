@@ -1,12 +1,10 @@
 package com.wechat.po;
 
-public class TextMessage {
+public class BaseMessage {
 	private String ToUserName;
 	private String FromUserName;
 	private long CreateTime;
 	private String MsgType;
-	private String Content;
-	private String MsgId;
 	public String getToUserName() {
 		return ToUserName;
 	}
@@ -31,17 +29,4 @@ public class TextMessage {
 	public void setMsgType(String msgType) {
 		MsgType = msgType;
 	}
-	public String getContent() {
-		return Content;
-	}
-	public void setContent(String content) {
-		Content = content;
-	}
-	public String getMsgId() {
-		return MsgId;
-	}
-	public void setMsgId(String msgId) {
-		MsgId = msgId;
-	}
-	
 }
