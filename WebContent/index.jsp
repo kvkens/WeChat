@@ -1,28 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>WeChat Message Services By Kvkens</title>
+    <title>WeChat Message Services</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="./bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-
+    <link href="./bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     <!-- Custom styles for this template -->
-    
-    <link href="./lib/cover.css" rel="stylesheet">
-
+    <link href="./lib/cover.css" rel="stylesheet" />
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    
+    <script type="text/javascript" src="lib/requirejs/require.js" data-main="app/app"></script>
   </head>
 
   <body>
@@ -49,7 +47,7 @@
           <div class="inner cover">
             <h1 class="cover-heading">WeChat Message Services.</h1>
             <p class="lead"> 微信消息服务是用Java作为开发后端消息接口为公众号接入自行服务.</p>
-            <p class="lead"> 软件目前开发中，稍后发布GitHub.</p>
+            <p class="lead"> 微信公众号开源项目托管在GitHub.</p>
             
             <p class="lead">
               <a href="https://github.com/kvkens/WeChat" target="_blank" class="btn btn-lg btn-default">GitHub</a>
@@ -67,11 +65,5 @@
       </div>
 
     </div>
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="./bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="./bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
   </body>
 </html>
