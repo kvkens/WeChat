@@ -1,6 +1,8 @@
 package com.wechat.servlet;
 
+import java.io.DataInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.Date;
 import java.util.Map;
@@ -58,33 +60,25 @@ public class WeChatServlet extends HttpServlet {
 		PrintWriter out = resp.getWriter();
 		// TODO Auto-generated method stub
 		try {
-			
 			Map<String,String> map = MessageUtil.xmlToMap(req);
 			String toUserName = map.get("ToUserName");
 			String fromUserName = map.get("FromUserName");
 			String msgType = map.get("MsgType");
 			String content = map.get("Content");
-			
-			
+			System.out.println("toUserName:"+toUserName+" fromUserName:"+fromUserName+" msgType:"+msgType+" content:"+content);
 			String message = null;
 			if(MessageUtil.MESSAGE_TEXT.equals(msgType)){
 				if("1".equals(content)){
 					message = MessageUtil.initText(toUserName, fromUserName, MessageUtil.firstMenu());
 				}else if("2".equals(content)){
 					message = MessageUtil.initNewsMessage(toUserName, fromUserName);
+				}else if("3".equals(content)){
+						
 				}else if("?".equals(content)||"？".equals(content)){
-					message = MessageUtil.initText(toUserName, fromUserName, MessageUtil.menuText());
+					message = MessageUtil.initText(toUserName, fromUserName, MessageUtil.menuText());	
 				}else{
 					message = MessageUtil.initText(toUserName, fromUserName, MessageUtil.menuText());
 				}
-				
-//				TextMessage text = new TextMessage();
-//				text.setFromUserName(toUserName);
-//				text.setToUserName(fromUserName);
-//				text.setMsgType("text");
-//				text.setCreateTime(new Date().getTime());
-//				text.setContent("您发送的消息是：" + content);
-//				message = MessageUtil.textMessageToXml(text);
 				
 			}else if(MessageUtil.MESSAGE_EVENT.equals(msgType)){
 				String eventType = map.get("Event");
