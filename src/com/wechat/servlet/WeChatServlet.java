@@ -18,6 +18,10 @@ import com.wechat.util.MessageUtil;
 
 public class WeChatServlet extends HttpServlet {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7987867715256981248L;
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
@@ -100,9 +104,5 @@ public class WeChatServlet extends HttpServlet {
 		
 	}
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 7987867715256981248L;
 
 }
