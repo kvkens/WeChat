@@ -15,6 +15,8 @@ import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
 import com.thoughtworks.xstream.XStream;
+import com.wechat.po.Image;
+import com.wechat.po.ImageMessage;
 import com.wechat.po.News;
 import com.wechat.po.NewsMessage;
 import com.wechat.po.TextMessage;
@@ -121,6 +123,13 @@ public class MessageUtil {
 		
 		return xstream.toXML(newsMessage);
 	}
+	
+	/**
+	 * 
+	 * @param toUserName
+	 * @param fromUserName
+	 * @return
+	 */
 	public static String initNewsMessage(String toUserName,String fromUserName){
 		String message = null;
 		List<News> newsList = new ArrayList<News>();
@@ -147,5 +156,35 @@ public class MessageUtil {
 		message = newsMessageToXml(newsMessage);
 		return message;
 	}
+	/**
+	 * 组装xml
+	 * @param toUserName
+	 * @param fromUserName
+	 * @return
+	 */
+	public static String initImageMessage(String toUserName,String fromUserName){
+		String message = null;
+		Image image = new Image();
+		image.setMediaId("W4cXVB8W6Hc8u1XcSQ49VWjRS8poIDfo_Fa0bVvGxecR6rvPChaNKDe5MIojHYsx");
+		ImageMessage imageMessage = new ImageMessage();
+		imageMessage.setFromUserName(toUserName);
+		imageMessage.setToUserName(fromUserName);
+		imageMessage.setMsgType(MESSAGE_IMAGE);
+		imageMessage.setCreateTime(new Date().getTime());
+		imageMessage.setImage(image);
+		message = imageMessageToXml(imageMessage);
+		return message;
+	}
+	/**
+	 * image To Message
+	 * @param imageMessage
+	 * @return
+	 */
+	public static String imageMessageToXml(ImageMessage imageMessage){
+		XStream xstream = new XStream();
+		xstream.alias("xml", imageMessage.getClass());
+		return xstream.toXML(imageMessage);
+	}
+	
 	
 }
