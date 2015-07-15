@@ -88,7 +88,8 @@ public class MessageUtil {
 		StringBuffer sb = new StringBuffer();
 		sb.append("欢迎您的关注，目前订阅号为开发状态：\n\n");
 		sb.append("1、文本消息\n");
-		sb.append("2、图文消息混排\n\n");
+		sb.append("2、图文消息\n");
+		sb.append("3、图片消息(需要企业认证)\n\n");
 		sb.append("回复？调用此菜单。");
 		return sb.toString();
 	}
