@@ -165,7 +165,7 @@ public class MessageUtil {
 	public static String initImageMessage(String toUserName,String fromUserName){
 		String message = null;
 		Image image = new Image();
-		image.setMediaId("W4cXVB8W6Hc8u1XcSQ49VWjRS8poIDfo_Fa0bVvGxecR6rvPChaNKDe5MIojHYsx");
+		image.setMediaId("fOV0kK0qtIoR0ukHDyyU46SSwdhyAGXb5WJdVrrkWiY-JjMpjuRDkFySRJLgjuDn");
 		ImageMessage imageMessage = new ImageMessage();
 		imageMessage.setFromUserName(toUserName);
 		imageMessage.setToUserName(fromUserName);
