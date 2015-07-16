@@ -17,6 +17,8 @@ import org.dom4j.io.SAXReader;
 import com.thoughtworks.xstream.XStream;
 import com.wechat.po.Image;
 import com.wechat.po.ImageMessage;
+import com.wechat.po.Music;
+import com.wechat.po.MusicMessage;
 import com.wechat.po.News;
 import com.wechat.po.NewsMessage;
 import com.wechat.po.TextMessage;
@@ -33,6 +35,7 @@ public class MessageUtil {
 	public static final String MESSAGE_IMAGE = "image";
 	public static final String MESSAGE_VOICE = "voice";
 	public static final String MESSAGE_VIDEO = "video";
+	public static final String MESSAGE_MUSIC = "music";
 	public static final String MESSAGE_LINK = "link";
 	public static final String MESSAGE_LOCATION = "location";
 	public static final String MESSAGE_EVENT = "event";
@@ -96,6 +99,7 @@ public class MessageUtil {
 		sb.append("3、图片消息(需要企业认证)\n");
 		sb.append("4、语音消息(需要企业认证)\n");
 		sb.append("5、视频消息(需要企业认证)\n");
+		sb.append("6、音乐消息(需要企业认证)\n");
 		sb.append("回复？调用此菜单。");
 		return sb.toString();
 	}
@@ -181,7 +185,7 @@ public class MessageUtil {
 	public static String initImageMessage(String toUserName,String fromUserName){
 		String message = null;
 		Image image = new Image();
-		image.setMediaId("fOV0kK0qtIoR0ukHDyyU46SSwdhyAGXb5WJdVrrkWiY-JjMpjuRDkFySRJLgjuDn");
+		image.setMediaId("abqmVqoPWW174-6nIiuAD0-Gs0RyA5i6zCUcs7j2ZrVay05Ni_DCbPfNoH8IKEeM");
 		ImageMessage imageMessage = new ImageMessage();
 		imageMessage.setFromUserName(toUserName);
 		imageMessage.setToUserName(fromUserName);
@@ -260,5 +264,35 @@ public class MessageUtil {
 		XStream xstream = new XStream();
 		xstream.alias("xml", videoMessage.getClass());
 		return xstream.toXML(videoMessage);
+	}
+
+	/**
+	 * music to xml
+	 * @param toUserName
+	 * @param fromUserName
+	 * @return
+	 */
+	public static String initMusicMessage(String toUserName,String fromUserName){
+		String message = null;
+		Music music = new Music();
+		MusicMessage musicMessage = new MusicMessage();
+		music.setTitle("一口气全念对");
+		music.setDescription("哎哟不错哦专辑新歌");
+		music.setThumbMediaId("abqmVqoPWW174-6nIiuAD0-Gs0RyA5i6zCUcs7j2ZrVay05Ni_DCbPfNoH8IKEeM");
+		music.setMusicUrl("http://rmc.xicp.net/WeChat/lib/jay.mp3");
+		music.setHQMusicUrl("http://rmc.xicp.net/WeChat/lib/jay.mp3");
+		musicMessage.setCreateTime(new Date().getTime());
+		musicMessage.setFromUserName(toUserName);
+		musicMessage.setToUserName(fromUserName);
+		musicMessage.setMsgType(MESSAGE_MUSIC);
+		musicMessage.setMusic(music);
+		message = musicMessageToXml(musicMessage);
+		return message;
+	}
+
+	public static String musicMessageToXml(MusicMessage musicMessage){
+		XStream xstream = new XStream();
+		xstream.alias("xml", musicMessage.getClass());
+		return xstream.toXML(musicMessage);
 	}
 }
