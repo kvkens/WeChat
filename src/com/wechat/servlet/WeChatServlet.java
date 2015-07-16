@@ -32,13 +32,8 @@ public class WeChatServlet extends HttpServlet {
 		String	timestamp = req.getParameter("timestamp");
 		String	nonce = req.getParameter("nonce");
 		String	echostr = req.getParameter("echostr");
-		System.out.println(signature);
-		System.out.println(timestamp);
-		System.out.println(nonce);
-		System.out.println(echostr);
-		System.out.println(req.getRemoteAddr());
+		System.out.println("signature:"+signature+" timestamp:"+timestamp+" nonce:"+nonce+" echostr:"+echostr);
 		PrintWriter pw = resp.getWriter();
-		//pw.println("This is Server");
 		try {
 			if(CheckUtil.checkSignuature(signature, timestamp, nonce)){
 				pw.print(echostr);
@@ -47,7 +42,7 @@ public class WeChatServlet extends HttpServlet {
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
-			pw.print("invalid exception ^_^");
+			pw.print("wechat param is invalid !");
 		}
 
 	}
@@ -74,10 +69,12 @@ public class WeChatServlet extends HttpServlet {
 					message = MessageUtil.initNewsMessage(toUserName, fromUserName);
 				}else if("3".equals(content)){
 					message = MessageUtil.initImageMessage(toUserName, fromUserName);
+				}else if("4".equals(content)){
+					message = MessageUtil.initVoiceMessage(toUserName, fromUserName);
 				}else if("?".equals(content)||"？".equals(content)){
 					message = MessageUtil.initText(toUserName, fromUserName, MessageUtil.menuText());	
 				}else{
-					message = MessageUtil.initText(toUserName, fromUserName, MessageUtil.menuText());
+					message = MessageUtil.initText(toUserName, fromUserName, MessageUtil.errorMenu());
 				}
 				
 			}else if(MessageUtil.MESSAGE_EVENT.equals(msgType)){

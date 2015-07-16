@@ -20,6 +20,8 @@ import com.wechat.po.ImageMessage;
 import com.wechat.po.News;
 import com.wechat.po.NewsMessage;
 import com.wechat.po.TextMessage;
+import com.wechat.po.Voice;
+import com.wechat.po.VoiceMessage;
 
 import java.util.Map;
 
@@ -89,8 +91,19 @@ public class MessageUtil {
 		sb.append("欢迎您的关注，目前订阅号为开发状态：\n\n");
 		sb.append("1、文本消息\n");
 		sb.append("2、图文消息\n");
-		sb.append("3、图片消息(需要企业认证)\n\n");
+		sb.append("3、图片消息(需要企业认证)\n");
+		sb.append("4、语音消息(需要企业认证)\n\n");
+		
 		sb.append("回复？调用此菜单。");
+		return sb.toString();
+	}
+	/**
+	 * error
+	 * @return
+	 */
+	public static String errorMenu(){
+		StringBuffer sb = new StringBuffer();
+		sb.append("指令输入不正确，\n请输入【？】提示菜单。");
 		return sb.toString();
 	}
 	/**
@@ -186,6 +199,34 @@ public class MessageUtil {
 		xstream.alias("xml", imageMessage.getClass());
 		return xstream.toXML(imageMessage);
 	}
-	
+	/**
+	 * 组装xml To voice
+	 * @param toUserName
+	 * @param fromUserName
+	 * @return
+	 */
+	public static String initVoiceMessage(String toUserName,String fromUserName){
+		String message = null;
+		Voice voice = new Voice();
+		VoiceMessage voiceMessage = new VoiceMessage();
+		voice.setMediaId("lWJx8C0VnkEh6vcMNcRIxAiEevWjFX2K83g3Yk3If7YKFAIS5Gf8PyPMTR5P-z5n");
+		voiceMessage.setCreateTime(new Date().getTime());
+		voiceMessage.setFromUserName(toUserName);
+		voiceMessage.setToUserName(fromUserName);
+		voiceMessage.setMsgType(MESSAGE_VOICE);
+		voiceMessage.setVoice(voice);
+		message = voiceMessageToXml(voiceMessage);
+		return message;
+	}
+	/**
+	 * voice To Message
+	 * @param imageMessage
+	 * @return
+	 */
+	public static String voiceMessageToXml(VoiceMessage voiceMessage){
+		XStream xstream = new XStream();
+		xstream.alias("xml", voiceMessage.getClass());
+		return xstream.toXML(voiceMessage);
+	}
 	
 }
