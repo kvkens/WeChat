@@ -20,8 +20,9 @@ public class WeChatTest {
 			System.out.println("Expires:"+ token.getExpiresIn());
 			//String path = "/Users/Kvkens/Code/Java/JavaWeb/WebContent/store/1.jpg";
 			//String path = "D:/精修/10.jpg";
-			String path = "D:/m.mp3";
-			String mediId = WeChatUtil.upload(path, token.getToken(), "voice");
+			//String path = "D:/m.mp3";
+			String path = "D:/movie.mp4";
+			String mediId = WeChatUtil.upload(path, token.getToken(), "video");
 			System.out.println(mediId);
 			//l6RY0srRLoZuNx2VSv6bNmsUIosXbD9J5J3VCE_EYX6gDHFKGCAJm2LZzy-inQcO
 		} catch (Exception e) {

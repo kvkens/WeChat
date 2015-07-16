@@ -20,6 +20,8 @@ import com.wechat.po.ImageMessage;
 import com.wechat.po.News;
 import com.wechat.po.NewsMessage;
 import com.wechat.po.TextMessage;
+import com.wechat.po.Video;
+import com.wechat.po.VideoMessage;
 import com.wechat.po.Voice;
 import com.wechat.po.VoiceMessage;
 
@@ -92,8 +94,8 @@ public class MessageUtil {
 		sb.append("1、文本消息\n");
 		sb.append("2、图文消息\n");
 		sb.append("3、图片消息(需要企业认证)\n");
-		sb.append("4、语音消息(需要企业认证)\n\n");
-		
+		sb.append("4、语音消息(需要企业认证)\n");
+		sb.append("5、视频消息(需要企业认证)\n");
 		sb.append("回复？调用此菜单。");
 		return sb.toString();
 	}
@@ -220,7 +222,7 @@ public class MessageUtil {
 	}
 	/**
 	 * voice To Message
-	 * @param imageMessage
+	 * @param voiceMessage
 	 * @return
 	 */
 	public static String voiceMessageToXml(VoiceMessage voiceMessage){
@@ -228,5 +230,35 @@ public class MessageUtil {
 		xstream.alias("xml", voiceMessage.getClass());
 		return xstream.toXML(voiceMessage);
 	}
-	
+	/**
+	 * 组装xml To video
+	 * @param toUserName
+	 * @param fromUserName
+	 * @return
+	 */
+	public static String initVideoMessage(String toUserName,String fromUserName){
+		String message = null;
+		Video video = new Video();
+		VideoMessage videoMessage = new VideoMessage();
+		video.setMediaId("cjwtyOwxkzJ_Vq8RCeDrtYnaj0uhgnFqFanOWcFrYtESTneRzjDK4vwmNiqSccwU");
+		video.setTitle("大狗熊");
+		video.setDescription("只是大狗熊测试视频");
+		videoMessage.setCreateTime(new Date().getTime());
+		videoMessage.setFromUserName(toUserName);
+		videoMessage.setToUserName(fromUserName);
+		videoMessage.setMsgType(MESSAGE_VIDEO);
+		videoMessage.setVideo(video);
+		message = videoMessageToXml(videoMessage);
+		return message;
+	}
+	/**
+	 * video To Message
+	 * @param videoMessage
+	 * @return
+	 */
+	public static String videoMessageToXml(VideoMessage videoMessage){
+		XStream xstream = new XStream();
+		xstream.alias("xml", videoMessage.getClass());
+		return xstream.toXML(videoMessage);
+	}
 }

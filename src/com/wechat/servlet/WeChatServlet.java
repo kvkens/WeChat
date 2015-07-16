@@ -71,6 +71,8 @@ public class WeChatServlet extends HttpServlet {
 					message = MessageUtil.initImageMessage(toUserName, fromUserName);
 				}else if("4".equals(content)){
 					message = MessageUtil.initVoiceMessage(toUserName, fromUserName);
+				}else if("5".equals(content)){
+					message = MessageUtil.initVideoMessage(toUserName, fromUserName);
 				}else if("?".equals(content)||"？".equals(content)){
 					message = MessageUtil.initText(toUserName, fromUserName, MessageUtil.menuText());	
 				}else{
