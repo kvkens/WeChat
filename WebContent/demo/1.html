@@ -1,0 +1,60 @@
+<div id="p1" class="easyui-panel" title="商品竞价" 
+        style="padding:0px;background:#fafafa;"
+        data-options="iconCls:'icon-save',fit:true">
+   
+<table id="dg" class="easyui-datagrid" fit="true" border="false" fitColumns="true" singleSelect="true">
+    <thead>
+        <tr>
+            <th data-options="field:'code',width:30">Code</th>
+            <th data-options="field:'name',width:30">Name</th>
+            <th data-options="field:'price',width:30">Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>001</td><td>name1</td><td>2323</td>
+        </tr>
+        <tr>
+            <td>002</td><td>name2</td><td>4612</td>
+        </tr>
+        <tr>
+            <td>001</td><td>name1</td><td>2323</td>
+        </tr>
+        <tr>
+            <td>002</td><td>name2</td><td>4612</td>
+        </tr>
+        <tr>
+            <td>001</td><td>name1</td><td>2323</td>
+        </tr>
+        <tr>
+            <td>002</td><td>name2</td><td>4612</td>
+        </tr>
+        <tr>
+            <td>001</td><td>name1</td><td>2323</td>
+        </tr>
+        <tr>
+            <td>002</td><td>name2</td><td>4612</td>
+        </tr>
+        <tr>
+            <td>001</td><td>name1</td><td>2323</td>
+        </tr>
+        <tr>
+            <td>002</td><td>name2</td><td>4612</td>
+        </tr>
+        
+    </tbody>
+</table>
+</div>
+<div id="tb">
+<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">添加商品</a>
+<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-help',plain:true">修改商品</a>
+</div>
+<script>
+$('#dg').datagrid({
+	toolbar: '#tb',
+	pagination:true,
+	rownumbers:true,
+	striped:true
+});
+
+</script>
