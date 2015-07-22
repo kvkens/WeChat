@@ -17,9 +17,15 @@ import org.dom4j.io.SAXReader;
 import com.thoughtworks.xstream.XStream;
 import com.wechat.po.Image;
 import com.wechat.po.ImageMessage;
+import com.wechat.po.Music;
+import com.wechat.po.MusicMessage;
 import com.wechat.po.News;
 import com.wechat.po.NewsMessage;
 import com.wechat.po.TextMessage;
+import com.wechat.po.Video;
+import com.wechat.po.VideoMessage;
+import com.wechat.po.Voice;
+import com.wechat.po.VoiceMessage;
 
 import java.util.Map;
 
@@ -29,6 +35,7 @@ public class MessageUtil {
 	public static final String MESSAGE_IMAGE = "image";
 	public static final String MESSAGE_VOICE = "voice";
 	public static final String MESSAGE_VIDEO = "video";
+	public static final String MESSAGE_MUSIC = "music";
 	public static final String MESSAGE_LINK = "link";
 	public static final String MESSAGE_LOCATION = "location";
 	public static final String MESSAGE_EVENT = "event";
@@ -88,8 +95,21 @@ public class MessageUtil {
 		StringBuffer sb = new StringBuffer();
 		sb.append("欢迎您的关注，目前订阅号为开发状态：\n\n");
 		sb.append("1、文本消息\n");
-		sb.append("2、图文消息混排\n\n");
+		sb.append("2、图文消息\n");
+		sb.append("3、图片消息(需要企业认证)\n");
+		sb.append("4、语音消息(需要企业认证)\n");
+		sb.append("5、视频消息(需要企业认证)\n");
+		sb.append("6、音乐消息(需要企业认证)\n");
 		sb.append("回复？调用此菜单。");
+		return sb.toString();
+	}
+	/**
+	 * error
+	 * @return
+	 */
+	public static String errorMenu(){
+		StringBuffer sb = new StringBuffer();
+		sb.append("指令输入不正确，\n请输入【？】提示菜单。");
 		return sb.toString();
 	}
 	/**
@@ -165,7 +185,7 @@ public class MessageUtil {
 	public static String initImageMessage(String toUserName,String fromUserName){
 		String message = null;
 		Image image = new Image();
-		image.setMediaId("W4cXVB8W6Hc8u1XcSQ49VWjRS8poIDfo_Fa0bVvGxecR6rvPChaNKDe5MIojHYsx");
+		image.setMediaId("abqmVqoPWW174-6nIiuAD0-Gs0RyA5i6zCUcs7j2ZrVay05Ni_DCbPfNoH8IKEeM");
 		ImageMessage imageMessage = new ImageMessage();
 		imageMessage.setFromUserName(toUserName);
 		imageMessage.setToUserName(fromUserName);
@@ -185,6 +205,94 @@ public class MessageUtil {
 		xstream.alias("xml", imageMessage.getClass());
 		return xstream.toXML(imageMessage);
 	}
-	
-	
+	/**
+	 * 组装xml To voice
+	 * @param toUserName
+	 * @param fromUserName
+	 * @return
+	 */
+	public static String initVoiceMessage(String toUserName,String fromUserName){
+		String message = null;
+		Voice voice = new Voice();
+		VoiceMessage voiceMessage = new VoiceMessage();
+		voice.setMediaId("lWJx8C0VnkEh6vcMNcRIxAiEevWjFX2K83g3Yk3If7YKFAIS5Gf8PyPMTR5P-z5n");
+		voiceMessage.setCreateTime(new Date().getTime());
+		voiceMessage.setFromUserName(toUserName);
+		voiceMessage.setToUserName(fromUserName);
+		voiceMessage.setMsgType(MESSAGE_VOICE);
+		voiceMessage.setVoice(voice);
+		message = voiceMessageToXml(voiceMessage);
+		return message;
+	}
+	/**
+	 * voice To Message
+	 * @param voiceMessage
+	 * @return
+	 */
+	public static String voiceMessageToXml(VoiceMessage voiceMessage){
+		XStream xstream = new XStream();
+		xstream.alias("xml", voiceMessage.getClass());
+		return xstream.toXML(voiceMessage);
+	}
+	/**
+	 * 组装xml To video
+	 * @param toUserName
+	 * @param fromUserName
+	 * @return
+	 */
+	public static String initVideoMessage(String toUserName,String fromUserName){
+		String message = null;
+		Video video = new Video();
+		VideoMessage videoMessage = new VideoMessage();
+		video.setMediaId("cjwtyOwxkzJ_Vq8RCeDrtYnaj0uhgnFqFanOWcFrYtESTneRzjDK4vwmNiqSccwU");
+		video.setTitle("大狗熊");
+		video.setDescription("只是大狗熊测试视频");
+		videoMessage.setCreateTime(new Date().getTime());
+		videoMessage.setFromUserName(toUserName);
+		videoMessage.setToUserName(fromUserName);
+		videoMessage.setMsgType(MESSAGE_VIDEO);
+		videoMessage.setVideo(video);
+		message = videoMessageToXml(videoMessage);
+		return message;
+	}
+	/**
+	 * video To Message
+	 * @param videoMessage
+	 * @return
+	 */
+	public static String videoMessageToXml(VideoMessage videoMessage){
+		XStream xstream = new XStream();
+		xstream.alias("xml", videoMessage.getClass());
+		return xstream.toXML(videoMessage);
+	}
+
+	/**
+	 * music to xml
+	 * @param toUserName
+	 * @param fromUserName
+	 * @return
+	 */
+	public static String initMusicMessage(String toUserName,String fromUserName){
+		String message = null;
+		Music music = new Music();
+		MusicMessage musicMessage = new MusicMessage();
+		music.setTitle("一口气全念对");
+		music.setDescription("哎哟不错哦专辑新歌");
+		music.setThumbMediaId("abqmVqoPWW174-6nIiuAD0-Gs0RyA5i6zCUcs7j2ZrVay05Ni_DCbPfNoH8IKEeM");
+		music.setMusicUrl("http://rmc.xicp.net/WeChat/lib/jay.mp3");
+		music.setHQMusicUrl("http://rmc.xicp.net/WeChat/lib/jay.mp3");
+		musicMessage.setCreateTime(new Date().getTime());
+		musicMessage.setFromUserName(toUserName);
+		musicMessage.setToUserName(fromUserName);
+		musicMessage.setMsgType(MESSAGE_MUSIC);
+		musicMessage.setMusic(music);
+		message = musicMessageToXml(musicMessage);
+		return message;
+	}
+
+	public static String musicMessageToXml(MusicMessage musicMessage){
+		XStream xstream = new XStream();
+		xstream.alias("xml", musicMessage.getClass());
+		return xstream.toXML(musicMessage);
+	}
 }
